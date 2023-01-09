@@ -1,6 +1,7 @@
 package com.springproject.myapp.service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -177,6 +178,31 @@ public class VehicleServiceImpl implements IVehicleService {
 			throw new ResourceNotFoundException("Record not found with id : " + vehicleId);
 		}
         
+    }
+
+    @Override
+    public double getTotalCost(long id){
+        Optional<Vehicle> vehicleDb = this.vehicleRepository.findById(id);
+        if(vehicleDb.isPresent() && vehicleDb.get().getExitTime()!=null){
+            Vehicle vehicle = vehicleDb.get();
+            LocalDateTime entryTime = vehicle.getEntryTime();
+            LocalDateTime exitTime = vehicle.getExitTime();
+            long timeDiff = ChronoUnit.HOURS.between(entryTime, exitTime);
+            if (timeDiff < 1){
+                return 3;
+            }
+            if (timeDiff<2){
+                return 5;
+            }
+            if (timeDiff<3){
+                return 7;
+            }
+            else {
+                return 7 + Math.ceil(timeDiff - 3);
+            }
+
+        }
+        return 0;
     }
     
 }

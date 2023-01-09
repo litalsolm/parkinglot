@@ -32,6 +32,11 @@ public class VehicleController {
         return ResponseEntity.ok().body(vehicleService.getVehicleById(id));
     }
 
+    @GetMapping("/vehicles/cost/{id}")
+    public double getTotalCost(@PathVariable long id){
+        return vehicleService.getTotalCost(id);
+    }
+
     @PostMapping("/vehicles")
 	public ResponseEntity<Vehicle> addVehicle(@RequestBody Vehicle vehicle){
 		return ResponseEntity.ok().body(this.vehicleService.addVehicle(vehicle));

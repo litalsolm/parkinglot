@@ -11,5 +11,6 @@ public interface IVehicleService {
     Vehicle getVehicleById(long vehicleId);
 	Vehicle exitVehicle(long vehicleId);
     Vehicle addVehicleWithSpace(Vehicle vehicle, long[] parkingId);
+    double getTotalCost(long id);
 
 }

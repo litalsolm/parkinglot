@@ -30,8 +30,6 @@ public class ParkingSpace {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "parkId")
-    private int parkId;
 
     @Column(name = "status")
     private Status status;
@@ -46,22 +44,16 @@ public class ParkingSpace {
 
     public ParkingSpace(int parkId, Status status){
         super();
-        this.parkId = parkId;
         this.status = status;
     }
     
     public long getId() {
         return id;
     }
-    public int getParkId() {
-        return parkId;
-    }
     public void setId(long id) {
         this.id = id;
     }
-    public void setParkId(int parkId) {
-        this.parkId = parkId;
-    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -78,7 +70,7 @@ public class ParkingSpace {
 
     @Override
     public String toString() {
-        return "ParkingSpace [id=" + id + ", parkId=" + parkId + ", status=" + status + ", vehicles=" + vehicles + "]";
+        return "ParkingSpace [id=" + id + ", status=" + status + ", vehicles=" + vehicles + "]";
     }
 
 }

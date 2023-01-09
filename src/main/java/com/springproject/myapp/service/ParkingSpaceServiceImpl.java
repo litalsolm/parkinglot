@@ -52,7 +52,6 @@ public class ParkingSpaceServiceImpl implements IParkingSpaceService {
 		if(parkingSpaceDb.isPresent()) {
 			ParkingSpace parkingSpaceUpdate = parkingSpaceDb.get();
 			parkingSpaceUpdate.setId(parkingSpace.getId());
-            parkingSpaceUpdate.setParkId(parkingSpace.getParkId());
             parkingSpaceUpdate.setStatus(parkingSpace.getStatus());
             parkingSpaceUpdate.setVehicles(parkingSpace.getVehicles());
 			parkingSpaceRepository.save(parkingSpaceUpdate);
