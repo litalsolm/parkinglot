@@ -155,9 +155,10 @@ public class VehicleServiceImpl implements IVehicleService {
     public Vehicle exitVehicle(long vehicleId) {
         Optional<Vehicle> vehicleDb = this.vehicleRepository.findById(vehicleId);
 		
-		if(vehicleDb.isPresent()) {
+		if(vehicleDb.isPresent() && vehicleDb.get().getExitTime() == null) {
 			Vehicle vehicleUpdate = vehicleDb.get();
             vehicleUpdate.setExitTime(LocalDateTime.now());
+            vehicleUpdate.setCost(getTotalCost(vehicleId));
             List<ParkingSpace> parkingSpaces = vehicleUpdate.getParkingSpaces();
             for (ParkingSpace parkingSpace : parkingSpaces) {
                 if (vehicleUpdate.getType() == Type.Motorbike && parkingSpace.getStatus() == Status.Occupied){
@@ -183,7 +184,7 @@ public class VehicleServiceImpl implements IVehicleService {
     @Override
     public double getTotalCost(long id){
         Optional<Vehicle> vehicleDb = this.vehicleRepository.findById(id);
-        if(vehicleDb.isPresent() && vehicleDb.get().getExitTime()!=null){
+        if(vehicleDb.isPresent() && vehicleDb.get().getExitTime() != null){
             Vehicle vehicle = vehicleDb.get();
             LocalDateTime entryTime = vehicle.getEntryTime();
             LocalDateTime exitTime = vehicle.getExitTime();

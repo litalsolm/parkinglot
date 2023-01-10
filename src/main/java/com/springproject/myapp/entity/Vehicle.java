@@ -41,6 +41,9 @@ public class Vehicle {
       @Column(name = "exitTime")
       private LocalDateTime exitTime;
 
+      @Column(name = "cost")
+      private double cost;
+
       @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
       @JsonIgnore
       @JoinTable(name = "vehicles_spaces",
@@ -105,6 +108,14 @@ public class Vehicle {
 
     public void setParkingSpaces(List<ParkingSpace> parkingSpaces) {
         this.parkingSpaces = parkingSpaces;
+    }
+
+    public void setCost(double cost) {
+      this.cost = cost;
+    }
+
+    public double getCost() {
+      return cost;
     }
 
     @Override

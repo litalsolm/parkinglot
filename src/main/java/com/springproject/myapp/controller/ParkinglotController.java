@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.PutMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -32,14 +32,29 @@ public class ParkinglotController {
         return ResponseEntity.ok().body(parkingSpaceService.getParkingSpaceById(id));
     }
 
-    @PostMapping("/parkinglot")
-	public ResponseEntity<ParkingSpace> addParkingSpace(@RequestBody ParkingSpace parkingSpace){
-		return ResponseEntity.ok().body(this.parkingSpaceService.addParkingSpace(parkingSpace));
-	}
-    
-    @PutMapping("/parkinglot/{id}")   
-    public ResponseEntity<ParkingSpace> updateParkingSpace(@PathVariable long id, @RequestBody ParkingSpace parkingSpace){
-        parkingSpace.setId(id);
-        return ResponseEntity.ok().body(this.parkingSpaceService.updateParkingSpace(parkingSpace));
+    @GetMapping("/parkinglot/occupied")
+    public ResponseEntity<List<ParkingSpace>> getAllOccupied(){
+        return ResponseEntity.ok().body(parkingSpaceService.getAllOccupied());
     }
+
+    @GetMapping("/parkinglot/free")
+    public ResponseEntity<List<ParkingSpace>> getAllFree(){
+        return ResponseEntity.ok().body(parkingSpaceService.getAllFree());
+    }
+
+    @GetMapping("/parkinglot/partly-occupied")
+    public ResponseEntity<List<ParkingSpace>> getAllPartlyOccupied(){
+        return ResponseEntity.ok().body(parkingSpaceService.getAllPartlyOccupied());
+    }
+
+    // @PostMapping("/parkinglot")
+	// public ResponseEntity<ParkingSpace> addParkingSpace(@RequestBody ParkingSpace parkingSpace){
+	// 	return ResponseEntity.ok().body(this.parkingSpaceService.addParkingSpace(parkingSpace));
+	// }
+    
+    // @PutMapping("/parkinglot/{id}")   
+    // public ResponseEntity<ParkingSpace> updateParkingSpace(@PathVariable long id, @RequestBody ParkingSpace parkingSpace){
+    //     parkingSpace.setId(id);
+    //     return ResponseEntity.ok().body(this.parkingSpaceService.updateParkingSpace(parkingSpace));
+    // }
 }

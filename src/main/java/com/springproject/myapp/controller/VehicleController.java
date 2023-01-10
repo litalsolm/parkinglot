@@ -37,10 +37,10 @@ public class VehicleController {
         return vehicleService.getTotalCost(id);
     }
 
-    @PostMapping("/vehicles")
-	public ResponseEntity<Vehicle> addVehicle(@RequestBody Vehicle vehicle){
-		return ResponseEntity.ok().body(this.vehicleService.addVehicle(vehicle));
-	}
+    // @PostMapping("/vehicles")
+	// public ResponseEntity<Vehicle> addVehicle(@RequestBody Vehicle vehicle){
+	// 	return ResponseEntity.ok().body(this.vehicleService.addVehicle(vehicle));
+	// }
 
     @PostMapping("/vehicles/parking/{id_list}")
 	public ResponseEntity<Vehicle> addVehicleWithSpace(@RequestBody Vehicle vehicle, @PathVariable long[] id_list){
